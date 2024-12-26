@@ -139,3 +139,7 @@ dist
 
 # Zip files
 *.zip
+
+# Credentials files
+*.md
+!README.md
