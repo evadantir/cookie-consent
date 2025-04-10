@@ -28,16 +28,16 @@ const buttonVariants = cva(["flex","font-medium", "items-center", "rounded"], {
     },
   },
   compoundVariants: [
-    intent: "tertiary",
+    {intent: "tertiary",
     disabled: true,
-    class: "disabled:text-neutral-400"
+    class: "disabled:text-neutral-400"}
   ],
   defaultVariants: {
     intent: "primary",
   },
 });
  
-export interface ButtonVariants extends VariantProps<typeof buttonVariants> {}
+export type ButtonVariants = VariantProps<typeof buttonVariants>;
  
 export const button = (variants: ButtonVariants) =>
   twMerge(buttonVariants(variants));
