@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Button } from "./Button";
 import { ToggleSwitch } from "./Toogle";
 
-interface CookiesPopUpProps {
+interface ManageCookiesPopUpProps {
   onAcceptAll: () => void;
   onDeclineAll: () => void;
   onSave: () => void;
 }
 
-const CookiesPopUp = ({ onAcceptAll, onDeclineAll, onSave }: CookiesPopUpProps) => {
+const ManageCookiesPopUp = ({ onAcceptAll, onDeclineAll, onSave }: ManageCookiesPopUpProps) => {
   const [analyticsConsent, setAnalyticsConsent] = useState(true);
   const [marketingConsent, setMarketingConsent] = useState(true);
 
@@ -94,4 +94,4 @@ const CookiesPopUp = ({ onAcceptAll, onDeclineAll, onSave }: CookiesPopUpProps) 
   );
 };
 
-export default CookiesPopUp;
+export default ManageCookiesPopUp;
