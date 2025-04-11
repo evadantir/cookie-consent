@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
- 
+import { ButtonHTMLAttributes, forwardRef } from "react";
+
 const buttonVariants = cva(["flex","font-medium", "items-center", "rounded"], {
   variants: {
     intent: {
@@ -36,8 +37,32 @@ const buttonVariants = cva(["flex","font-medium", "items-center", "rounded"], {
     intent: "primary",
   },
 });
- 
+
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
- 
-export const button = (variants: ButtonVariants) =>
-  twMerge(buttonVariants(variants));
+
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>, ButtonVariants {
+  textContent?: string;
+  isDisabled?: boolean;
+}
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ textContent, isDisabled = false, intent, disabled, className, ...props }, ref) => {
+    // Convert disabled to boolean to ensure type safety
+    const isButtonDisabled = Boolean(isDisabled || disabled);
+    
+    return (
+      <button
+        ref={ref}
+        className={twMerge(buttonVariants({ intent, disabled: isButtonDisabled }), className)}
+        disabled={isButtonDisabled}
+        {...props}
+      >
+        {textContent}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
